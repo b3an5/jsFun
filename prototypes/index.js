@@ -123,7 +123,17 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 
+      clubs.reduce((acc, club) => {
+        club.members.forEach((member) => {
+          if (!acc[member]) {
+            acc[member] = [club.club];
+          } else {
+            acc[member].push(club.club)
+          }
+        });
+        return acc;
+      }, []);
     return result;
 
     // Annotation:
@@ -159,7 +169,13 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map((modu) => {
+      const obj = {
+        mod: modu.mod,
+        studentsPerInstructor: modu.students / modu.instructors
+      }
+      return obj
+    });
     return result;
 
     // Annotation:
